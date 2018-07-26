@@ -83,12 +83,40 @@ function main() {
     return current_node;
   }
 
+  function reverseList(linkedlist) {
+    if(linkedlist.head === null) {
+      console.log('List is empty');
+      return;
+    }
+  
+    if(linkedlist.head.next === null) {
+      console.log('There is only one item in the list');
+      return;
+    }
+  
+    let current_node = linkedlist.head.next;
+    let prev_node = linkedlist.head;
+    prev_node.next = null;
+    let next_node = null;
+  
+    while(current_node) {
+      next_node = current_node.next;
+      current_node.next = prev_node;
+      if (next_node === null) {
+        linkedlist.head = current_node;
+      }
+      prev_node = current_node;
+      current_node = next_node;
+    }
+  }
+
   console.log(size(SLL));
   console.log(isEmpty(SLL));
   console.log(isEmpty(new LinkedList()));
   console.log(findPrevious(SLL, 'Helo'));
   console.log(findLast(SLL));
-
+  reverseList(SLL);
+  display(SLL);
 
 }
 
@@ -114,3 +142,5 @@ function WhatDoesThisProgramDo(lst){
 
 //WhatDoesThisProgramDo eliminates duplicate values from a linked list.  It will iterate about n + n-1 + n-2... + 1,  where n
 //is the number of elements in the linked list.  So it is worse than O(n) but better than O(n^2).
+
+

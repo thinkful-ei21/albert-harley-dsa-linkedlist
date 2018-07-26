@@ -20,19 +20,22 @@ function main() {
   SLL.remove('Tauhida');
   display(SLL);
 
-  function display(linkedlist) {
+  function linkedToArray(linkedlist) {
     const output = [];
     let current_node = linkedlist.head;
     while(current_node) {
       output.push(current_node.value);
       current_node = current_node.next;
     }
-    console.log(output);
     return output;
   }
 
+  function display(linkedlist) {
+    console.log(linkedToArray(linkedlist));
+  }
+
   function size(linkedlist) {
-    return display(linkedlist).length;
+    return linkedToArray(linkedlist).length;
   }
 
   function isEmpty(linkedlist) {
@@ -110,6 +113,28 @@ function main() {
     }
   }
 
+  function thirdFromEnd(linkedlist) {
+    const arrayVersion = linkedToArray(linkedlist);
+    if (arrayVersion.length < 3) {
+      console.log('List is too small');
+      return null;
+    }
+    return linkedlist.find(arrayVersion[arrayVersion.length-3]);
+  }
+
+  function middleOfList(linkedlist) {
+    const arrayVersion = linkedToArray(linkedlist);
+    const length = arrayVersion.length;
+    
+    if (length === 0) {
+      console.log('List is empty');
+      return null;
+    }
+    //[1,2,3,4,5]
+    //[1,2,3,4]
+    return linkedlist.find(arrayVersion[Math.floor(arrayVersion.length/2)]);
+  }
+
   console.log(size(SLL));
   console.log(isEmpty(SLL));
   console.log(isEmpty(new LinkedList()));
@@ -117,7 +142,12 @@ function main() {
   console.log(findLast(SLL));
   reverseList(SLL);
   display(SLL);
-
+  console.log(thirdFromEnd(SLL));
+  console.log(middleOfList(SLL));
+  const SLL2 = new LinkedList();
+  console.log(middleOfList(SLL2));
+  SLL2.insertBefore('testing');
+  console.log(middleOfList(SLL2));
 }
 
 main();

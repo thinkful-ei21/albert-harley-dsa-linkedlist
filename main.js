@@ -88,6 +88,29 @@ function main() {
   console.log(isEmpty(new LinkedList()));
   console.log(findPrevious(SLL, 'Helo'));
   console.log(findLast(SLL));
+
+
 }
 
 main();
+
+function WhatDoesThisProgramDo(lst){
+  let current = lst.head;
+  //This outer loop iterates through unique list after it's been modified by inner loop for each step
+  while(current !== null){
+    let newNode = current;
+    //This inner while loop removes all nodes with the same value as current node
+    while (newNode.next !== null) {
+      if (newNode.next.value === current.value) {
+        newNode.next = newNode.next.next;
+      }
+      else{
+        newNode = newNode.next;
+      }
+    }
+    current = current.next;
+  }
+}
+
+//WhatDoesThisProgramDo eliminates duplicate values from a linked list.  It will iterate about n + n-1 + n-2... + 1,  where n
+//is the number of elements in the linked list.  So it is worse than O(n) but better than O(n^2).

@@ -1,6 +1,6 @@
 'use strict';
 
-const LinkedList = require('./linkedlist');
+const {LinkedList, CycleList} = require('./linkedlist');
 
 function main() {
 
@@ -135,6 +135,23 @@ function main() {
     return linkedlist.find(arrayVersion[Math.floor(arrayVersion.length/2)]);
   }
 
+  function cycleInList(linkedlist) {
+    if (linkedlist.head === null) {
+      console.log('List is empty');
+      return false;
+    }
+    const visited = [];
+    let current_node = linkedlist.head;
+    while (current_node.next !== null) {
+      if(visited.includes(current_node.next)) {
+        return true;
+      }
+      visited.push(current_node.next);
+      current_node = current_node.next;
+    }
+    return false; 
+  }
+
   console.log(size(SLL));
   console.log(isEmpty(SLL));
   console.log(isEmpty(new LinkedList()));
@@ -148,6 +165,12 @@ function main() {
   console.log(middleOfList(SLL2));
   SLL2.insertBefore('testing');
   console.log(middleOfList(SLL2));
+  SLL2.insertBefore('testing');
+  SLL2.insertBefore('testing');
+  const CLL = new CycleList();
+  console.log(cycleInList(CLL));
+  console.log(cycleInList(SLL2));
+  
 }
 
 main();

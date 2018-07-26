@@ -7,6 +7,16 @@ class _Node {
   }
 }
 
+class CycleList {
+  constructor() {
+    this.tail = new _Node('test2', null);
+    this.middle = new _Node('test1', null);
+    this.head = new _Node('test0', this.middle);
+    this.middle.next = this.tail;
+    this.tail.next = this.head;
+  }
+}
+
 class LinkedList {
   
   constructor() {
@@ -160,4 +170,4 @@ class LinkedList {
 
 }
 
-module.exports = LinkedList;
+module.exports = {LinkedList, CycleList};
